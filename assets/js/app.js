@@ -84,6 +84,13 @@ yText .append("text")
     .attr("class", "aText inactive y")
     .text("Lacks Healthcare (%)");
     
+yText.append("text")
+    .attr("y", 44)
+    .attr("data-name", "age")
+    .attr("data-axis", "y")
+    .attr("class", "aText inactive y")
+    .text("Age (Median)");
+    
 // Visualize data  _______________________________________  
 // Define dynamic circle radius
 var cRadius;
@@ -117,7 +124,9 @@ function visualize (csvData) {
       .html(function(d) {
             //Build text box
             var stateLine = `<div>${d.state}</div>`;
-            var yLine = `<div>${curY}: ${d[curY]}%</div>`;
+            if  (curY === "age") {
+            	 yLine = `<div>${curY}: ${parseFloat(d[curY]).toLocaleString("en")}</div>`;}
+            else yLine = `<div>${curY}: ${d[curY]}%</div>`;
             if (curX === "poverty") {
                 xLine = `<div>${curX}: ${d[curX]}%</div>`}          
             else {
